@@ -1,6 +1,6 @@
 #region UICode
-int xx = 10;	//[0,100]Column Width
-int yy = 10;	//[0,100]Row Height
+int Amount1 = 10;	//[0,100]Column Width
+int Amount2 = 10;	//[0,100]Row Height
 #endregion
 
 
@@ -21,7 +21,7 @@ void Render(Surface dst, Surface src, Rectangle rect)
         {
                 CurrentPixel = src[x,y];
 
-                if((x%xx == 0) || (y%yy == 0)){
+                if((x%Amount1 == 0) || (y%Amount2 == 0)){
             // TODO: Add pixel processing code here
             // Access RGBA values this way, for example:
              CurrentPixel.R = (byte)PrimaryColor.R;
