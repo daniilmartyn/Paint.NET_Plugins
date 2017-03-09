@@ -1,7 +1,7 @@
 #region UICode
 int Amount1 = 2;    // [1,10] Base star size
-int Amount2 = 7; // [1,10] Star size variation
-int Amount3 = 20;      // [1, 500] Star density
+int Amount2 = 3; // [1,10] Star size variation
+int Amount3 = 1000;      // [1, 1500] Star density
 byte Amount4 = 0;     // [255] Randomize starfield
 #endregion
 
