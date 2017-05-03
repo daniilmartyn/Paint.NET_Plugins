@@ -9,8 +9,11 @@
 // Help:
 #region UICode
 IntSliderControl Amount1 = 50; // [5,500] Border Radius
-DoubleSliderControl Amount2 = 1; // [0.01,10] Fade Falloff
 #endregion
+
+double scale_down(double x){
+    return ((Math.PI/2)*x)/Amount1;
+}
 
 void Linear(Surface dst, Surface src, Rectangle selection, Rectangle rect){
     ColorBgra CurrentPixel;
@@ -21,16 +24,16 @@ void Linear(Surface dst, Surface src, Rectangle selection, Rectangle rect){
             CurrentPixel = src[x,y];
 
             if(x >= selection.Left && x < selection.Left + Amount1){
-                double coeff = Math.Pow((double)(x-selection.Left+1)/(double)Amount1, 1.0/Amount2);
+                double coeff = Math.Sin(scale_down(x));
                 CurrentPixel.A = (byte)(255*coeff);
             }
             if(x >= selection.Right-Amount1 && x < selection.Right){
-                double coeff = Math.Pow((double)(selection.Right-x)/(double)Amount1, 1.0/Amount2);
+                double coeff = Math.Sin(scale_down(selection.Right - x));
                 CurrentPixel.A = (byte)(255*coeff);
             }
             
             if(y >= selection.Top && y < selection.Top + Amount1){
-                double coeff = Math.Pow((double)(y- selection.Top+1)/(double)Amount1, 1.0/Amount2);
+                double coeff = Math.Sin(scale_down(y));
                 byte alpha = (byte)(255*coeff);
                 
                 if((x >= selection.Left && x < selection.Left + Amount1) || (x >= selection.Right-Amount1 && x < selection.Right)){
@@ -40,7 +43,7 @@ void Linear(Surface dst, Surface src, Rectangle selection, Rectangle rect){
                 }
             }
             if(y >= selection.Bottom-Amount1 && y < selection.Bottom){
-                double coeff = Math.Pow((double)(selection.Bottom-y)/(double)Amount1, 1.0/Amount2);
+                double coeff = Math.Sin(scale_down(selection.Bottom - y));
                 byte alpha = (byte)(255*coeff);
                 if((x >= selection.Left && x < selection.Left + Amount1) || (x >= selection.Right-Amount1 && x < selection.Right)){
                     CurrentPixel.A = (CurrentPixel.A <= alpha) ? CurrentPixel.A : alpha;
